@@ -87,7 +87,7 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {displayedData.map((item, index) => (
+              {displayedData.map((item, index) => (
                   
                   <tr key={index} style={{ border: "1px solid #ddd", padding: "8px" }}>
                     <td style={{ border: "1px solid #ddd", padding: "8px" }}>
