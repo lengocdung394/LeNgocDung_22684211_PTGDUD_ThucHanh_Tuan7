@@ -19,7 +19,7 @@ export default function Dashboard() {
     return (
         <div>
             <div style={{ height: "70px", display: "flex", borderBottom: "5px solid lightblue", paddingTop: "15px" }}>
-                <h2 style={{ margin: "0", color: "pink" }}>DashBoard</h2>
+                <h2 style={{ margin: "0", color : '#FF4081' }}>DashBoard</h2>
                 <input type="text" style={{ width: "220px", height: "25px", marginLeft: "410px", borderRadius: "5px" }} />
                 <img src="../image/bell.png" alt="" style={{ width: "25px", height: "25px", marginLeft: "20px", marginRight: "20px" }} />
                 <h3 style={{ margin: "0px" }}>?</h3>
@@ -27,7 +27,11 @@ export default function Dashboard() {
             </div>
 
             <div style={{ height: "300px", borderBottom: "5px solid lightblue" }}>
-                <h2 style={{ color: "black" }}>Overview</h2>
+                <div style={{ display: "flex", padding: "10px" }}>
+                    <img style={{ width: "25px", height: "25px" }} src="../Lab_05/Squares four 1.png" alt="" />
+                    <h3 style={{ color: "black", margin: "0px" }}>Overview</h3>
+                </div>
+
                 <div style={{ display: "flex", padding: "0px" }}>
                     {data.map((item, index) => {
                         const backgroundColor = colors[index % colors.length];
@@ -47,6 +51,10 @@ export default function Dashboard() {
 
 
             <div style={{ height: "500px", marginRight: "15px" }}>
+                <div style={{ display: "flex", padding: "10px" }}>
+                    <img style={{ width: "25px", height: "25px" }} src="../Lab_05/File text 1.png" alt="" />
+                    <h3 style={{ padding: "0px", margin: "0px" }}>Detailed Report</h3>
+                </div>
                 <table style={{ width: "100%", borderCollapse: "collapse" }}>
                     <thead>
                         <tr>
