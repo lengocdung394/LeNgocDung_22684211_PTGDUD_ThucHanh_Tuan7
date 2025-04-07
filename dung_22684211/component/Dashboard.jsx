@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 export default function Dashboard() {
     const [data, setData] = useState([]);
     const [datatable, setDataTable] = useState([]);
-    const [selectedItem, setSelectedItem] = useState(null); // Add this line
+    const [selectedItem, setSelectedItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const displayedData = datatable.slice(0, 6); // Hiển thị 6 dòng đầu tiên
+    const displayedData = datatable.slice(0, 6);
 
     useEffect(() => {
         fetch('https://67e369142ae442db76d0029b.mockapi.io/dttb')
@@ -20,29 +20,62 @@ export default function Dashboard() {
     }, []);
 
     const handleOnclick = (item) => {
-        setSelectedItem(item); // Set the selected item
-        setIsModalOpen(true); // Open modal
+        setSelectedItem(item);
+        setIsModalOpen(true);
     };
 
-    const handleEdit = (id) => {
-        {
-            console.log(id)
-        }
-    }
+    const handleEdit = (id, updatedItem) => {
+        fetch(`https://67e369142ae442db76d0029b.mockapi.io/dttb/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedItem),
+        })
+            .then(response => response.json())
+            .then(data => {
+                setDataTable(prev => prev.map(item => (item.id === id ? data : item)));
+                closeModal();
+            })
+            .catch(error => console.error('Error updating item:', error));
+    };
+
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedItem(null);
     };
+
     var style = { width: "250px", height: "30px", borderRadius: "5px", margin: "15px" }
 
     function Modal({ isOpen, onClose, item }) {
+        const [name, setName] = useState(item ? item.name : '');
+        const [company, setCompany] = useState(item ? item.company : '');
+        const [orderValue, setOrderValue] = useState(item ? item.orderValue : '');
+        const [orderDate, setOrderDate] = useState(item ? new Date(item.orderDate).toLocaleDateString() : '');
+        const [status, setStatus] = useState(item ? item.status : '');
+
+        useEffect(() => {
+            if (item) {
+                setName(item.name);
+                setCompany(item.company);
+                setOrderValue(item.orderValue);
+                setOrderDate(new Date(item.orderDate).toLocaleDateString());
+                setStatus(item.status);
+            }
+        }, [item]);
+
         if (!isOpen) return null;
 
-        const [name, setName] = useState(item.name);
-        const [company, setCompany] = useState(item.company);
-        const [orderValue, setOrderValue] = useState(item.orderValue);
-        const [orderDate, setOrderDate] = useState(new Date(item.orderDate).toLocaleDateString());
-        const [status, setStatus] = useState(item.status);
+        const handleSave = () => {
+            const updatedItem = {
+                name,
+                company,
+                orderValue,
+                orderDate: new Date(orderDate).toISOString(), // Đảm bảo định dạng ngày đúng
+                status,
+            };
+            handleEdit(item.id, updatedItem);
+        };
 
         return (
             <div style={modalStyles.overlay}>
@@ -83,10 +116,9 @@ export default function Dashboard() {
                         </tbody>
                     </table>
                     <div style={{ display: "flex", justifyContent: "center", margin: "auto", marginTop: "20px" }}>
-                        <button style={{ width: "150px", height: "50px" }} onClick={onClose}>Close</button>
-                        <button style={{ width: "150px", height: "50px" }} onClick={() => handleEdit(item.id)}>Save</button>
+                        <button style={{ width: "150px", height: "50px", borderRadius: "5px" }} onClick={onClose}>Close</button>
+                        <button style={{ width: "150px", height: "50px", borderRadius: "5px" }} onClick={handleSave}>Save</button>
                     </div>
-
                 </div>
             </div>
         );
@@ -116,15 +148,15 @@ export default function Dashboard() {
 
     return (
         <div>
-            <div style={{ height: "70px", display: "flex", borderBottom: "5px solid lightblue", paddingTop: "15px" }}>
+            <div style={{ height: "50px", display: "flex", borderBottom: "2px solid gray", paddingTop: "15px" }}>
                 <h2 style={{ margin: "0", color: '#FF4081' }}>DashBoard</h2>
-                <input type="text" style={{ width: "220px", height: "25px", marginLeft: "410px", borderRadius: "5px" }} />
+                <input type="text" style={{ width: "220px", height: "25px", marginLeft: "500px", borderRadius: "5px" }} />
                 <img src="../image/bell.png" alt="" style={{ width: "25px", height: "25px", marginLeft: "20px", marginRight: "20px" }} />
                 <h3 style={{ margin: "0px" }}>?</h3>
                 <img src="../image/account.jpg" alt="" style={{ width: "32px", height: "32px", borderRadius: "20px", marginLeft: "20px" }} />
             </div>
 
-            <div style={{ height: "300px", borderBottom: "5px solid lightblue" }}>
+            <div style={{ height: "240px" }}>
                 <div style={{ display: "flex", padding: "10px" }}>
                     <img style={{ width: "25px", height: "25px" }} src="../Lab_05/Squares four 1.png" alt="" />
                     <h3 style={{ color: "black", margin: "0px" }}>Overview</h3>
@@ -152,15 +184,14 @@ export default function Dashboard() {
                     <img style={{ width: "25px", height: "25px" }} src="../Lab_05/File text 1.png" alt="" />
                     <h3 style={{ padding: "0px", margin: "0px" }}>Detailed Report</h3>
                     <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-                        <div style={{ border: "1px solid #FF4081", padding: "5px", display: "flex", marginRight: "7px", color: "#FF4081" }}><img src="../Lab_05/Download.png" alt="" />import</div>
-                        <div style={{ border: "1px solid #FF4081", padding: "5px", display: "flex", color: "#FF4081" }}><img src="../Lab_05/Move up.png" />export</div>
-
+                        <div style={{ border: "1px solid #FF4081", padding: "5px", display: "flex", marginRight: "7px", color: "#FF4081", borderRadius: "5px" }}><img src="../Lab_05/Download.png" alt="" />import</div>
+                        <div style={{ border: "1px solid #FF4081", padding: "5px", display: "flex", color: "#FF4081", borderRadius: "5px" }}><img src="../Lab_05/Move up.png" />export</div>
                     </div>
                 </div>
                 <table style={{ width: "100%", borderCollapse: "collapse" }}>
                     <thead>
                         <tr>
-                            <th style={{ border: "1px solid #ddd", padding: "8px" }}><input type='checkbox' ></input></th>
+                            <th style={{ border: "1px solid #ddd", padding: "8px" }}><input type='checkbox' /></th>
                             <th style={{ border: "1px solid #ddd", padding: "8px" }}>Customer Name</th>
                             <th style={{ border: "1px solid #ddd", padding: "8px" }}>Company</th>
                             <th style={{ border: "1px solid #ddd", padding: "8px" }}>Order Value</th>

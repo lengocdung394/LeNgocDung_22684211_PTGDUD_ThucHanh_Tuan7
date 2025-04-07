@@ -21,9 +21,9 @@ function App() {
 
   return (
     <div style={{ marginLeft: "120px", display: "flex" }}>
-      <div id="component" style={{ display: 'flex', height: "900px", width: "1300px", margin: "10px" }}>
-        <div id="left" style={{ width: "230px", margin: "10px", border: "5px solid lightblue", borderRadius: "5px", backgroundColor: "white" }}>
-          <img src="../Lab_05/Image 1858.png" alt="" />
+      <div id="component" style={{ display: 'flex', height: "900px", width: "1200px", margin: "10px" , border: "2px solid gray", borderRadius: "5px"}}>
+        <div id="left" style={{ width: "230px" , borderRight: "2px solid gray"}}>
+          <img src="../Lab_05/Image 1858.png" style={{width:"90px", height:"40px", margin:"10px"}} alt="" />
           <ul style={{ margin: "10px", padding: "0" }}>
             {menuItems.map((item) => (
               <li
@@ -39,7 +39,7 @@ function App() {
                 onClick={() => handleItemClick(item)}
               >
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <img style={{ width: "25px", height: "25px" }} src={item.src} alt="" />
+                  <img style={{ width: "20px", height: "20px", marginRight:"5px" }} src={item.src} alt="" />
                   {item.name}
                 </div>
 
@@ -49,7 +49,7 @@ function App() {
           </ul>
 
 
-          <div style={{ position: 'relative', display: 'inline-block' }}>
+          <div style={{ position: 'relative', display: 'inline-block', marginTop:"90px" }}>
             <img src="../Lab_05/Group.png" alt="Group" style={{ width: '100%', height: 'auto' }} />
             <p style={{
                 color: "lightblue",
@@ -89,7 +89,7 @@ function App() {
           </div>
 
         </div>
-        <div id="right" style={{ width: "1000px", paddingLeft: "20px", margin: "10px", border: "5px solid lightblue", borderRadius: "5px", backgroundColor: "white" }}>
+        <div id="right" style={{ width: "1000px", paddingLeft:"20px"}}>
 
           <Outlet /> {/* Nội dung này sẽ được render từ các route con */}
 
