@@ -21,9 +21,9 @@ function App() {
 
   return (
     <div style={{ marginLeft: "120px", display: "flex" }}>
-      <div id="component" style={{ display: 'flex', height: "900px", width: "1200px", margin: "10px" , border: "2px solid gray", borderRadius: "5px"}}>
-        <div id="left" style={{ width: "230px" , borderRight: "2px solid gray"}}>
-          <img src="../Lab_05/Image 1858.png" style={{width:"90px", height:"40px", margin:"10px"}} alt="" />
+      <div id="component" style={{ display: 'flex', height: "850px", width: "1200px", margin: "10px", border: "2px solid gray", borderRadius: "5px" }}>
+        <div id="left" style={{ width: "230px", borderRight: "2px solid gray" }}>
+          <img src="../Lab_05/Image 1858.png" style={{ width: "90px", height: "40px", margin: "10px" }} alt="" />
           <ul style={{ margin: "10px", padding: "0" }}>
             {menuItems.map((item) => (
               <li
@@ -39,7 +39,7 @@ function App() {
                 onClick={() => handleItemClick(item)}
               >
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <img style={{ width: "20px", height: "20px", marginRight:"5px" }} src={item.src} alt="" />
+                  <img style={{ width: "20px", height: "20px", marginRight: "5px" }} src={item.src} alt="" />
                   {item.name}
                 </div>
 
@@ -49,36 +49,38 @@ function App() {
           </ul>
 
 
-          <div style={{ position: 'relative', display: 'inline-block', marginTop:"90px" }}>
+          <div style={{ position: 'relative', display: 'inline-block', marginTop: "90px" }}>
             <img src="../Lab_05/Group.png" alt="Group" style={{ width: '100%', height: 'auto' }} />
             <p style={{
-                color: "lightblue",
-                position: 'absolute',
-                bottom: '70px', // Adjust as needed
-                left: '50%',
-                transform: 'translateX(-50%)',
-                height: '40px',
-                width: '150px',
-                backgroundColor: 'white',
-                border: '1px soild rgb(165, 236, 245)',
-                borderRadius: '5px',
-                cursor: 'pointer',
-                fontSize: '16px',
-                marginBottom: '7px'
-              }}
+              color: "black",
+              position: 'absolute',
+              fontWeight: "bold",
+              left: '50%',
+              transform: 'translateX(-50%)',
+              height: '40px',
+              marginLeft: "5px",
+              width: '150px',
+              backgroundColor: 'white',
+              border: '1px soild rgb(165, 236, 245)',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '16px',
+              marginBottom: '7px'
+            }}
             >V2.0 is available</p>
             <button
               style={{
-                color: "lightblue",
+                color: "white",
                 position: 'absolute',
-                bottom: '20px', // Adjust as needed
+                bottom: '-90px', // Adjust as needed
                 left: '50%',
                 transform: 'translateX(-50%)',
                 padding: '10px 20px',
                 height: '40px',
-                width: '150px',
-                backgroundColor: 'white',
-                border: '1px soild rgb(165, 236, 245)',
+                width: '170px',
+
+                backgroundColor: 'rgb(167, 240, 240)',
+                border: '1px soild rgb(141, 233, 233)',
                 borderRadius: '5px',
                 cursor: 'pointer',
                 fontSize: '16px',
@@ -89,7 +91,7 @@ function App() {
           </div>
 
         </div>
-        <div id="right" style={{ width: "1000px", paddingLeft:"20px"}}>
+        <div id="right" style={{ width: "1000px", paddingLeft: "20px" }}>
 
           <Outlet /> {/* Nội dung này sẽ được render từ các route con */}
 

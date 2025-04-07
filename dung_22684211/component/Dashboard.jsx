@@ -144,6 +144,10 @@ export default function Dashboard() {
         },
     };
 
+
+    const addData = () => {
+        console.log("click add")
+    }
     const colors = ["#FFB6C1", "#E0F7FA", "#FFD1DC"];
 
     return (
@@ -179,11 +183,12 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            <div style={{ height: "500px", marginRight: "15px" }}>
+            <div style={{ height: "380px", marginRight: "15px" }}>
                 <div style={{ display: "flex", padding: "10px" }}>
                     <img style={{ width: "25px", height: "25px" }} src="../Lab_05/File text 1.png" alt="" />
                     <h3 style={{ padding: "0px", margin: "0px" }}>Detailed Report</h3>
                     <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
+                        <div onClick={addData} style={{ border: "1px solid #FF4081", padding: "5px", display: "flex", marginRight: "7px", color: "#FF4081", width: "40px", borderRadius: "5px" }}>Add</div>
                         <div style={{ border: "1px solid #FF4081", padding: "5px", display: "flex", marginRight: "7px", color: "#FF4081", borderRadius: "5px" }}><img src="../Lab_05/Download.png" alt="" />import</div>
                         <div style={{ border: "1px solid #FF4081", padding: "5px", display: "flex", color: "#FF4081", borderRadius: "5px" }}><img src="../Lab_05/Move up.png" />export</div>
                     </div>
@@ -223,6 +228,21 @@ export default function Dashboard() {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div style={{ display: "flex" }}>
+                <p style={{ width: "200px" }}>63 result</p>
+                <ul style={{ display: "flex", justifyContent: "center", listStyle: "none", padding: "0px", marginLeft: "430px" }}>
+                    <li style={{ width: "25px", height: "25px", padding: "5px" }}><img style={{ width: "25px", height: "25px" }} src="../Lab_05/left-arrow.png" alt="" /></li>
+                    <li style={{ width: "25px", height: "25px", padding: "5px", borderRadius: "20px", color: "white", justifyContent: "center", backgroundColor: "#FF4081" }}>1</li>
+                    <li style={{ width: "25px", height: "25px", padding: "5px" }}>2</li>
+                    <li style={{ width: "25px", height: "25px", padding: "5px" }}>3</li>
+                    <li style={{ width: "25px", height: "25px", padding: "5px" }}>4</li>
+                    <li style={{ width: "25px", height: "25px", padding: "5px" }}>....</li>
+                    <li style={{ width: "25px", height: "25px", padding: "5px" }}>11</li>
+                    <li style={{ width: "25px", height: "25px", padding: "5px" }}>12</li>
+                    <li style={{ width: "25px", height: "25px", padding: "5px" }}><img style={{ width: "25px", height: "25px" }} src="../Lab_05/right-arrow (1).png" alt="" /></li>
+
+                </ul>
             </div>
 
             <Modal isOpen={isModalOpen} onClose={closeModal} item={selectedItem} />
