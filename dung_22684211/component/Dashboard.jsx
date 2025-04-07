@@ -5,6 +5,7 @@ export default function Dashboard() {
     const [datatable, setDataTable] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isAdding, setIsAdding] = useState(false); // Biến để xác định hành động thêm hay chỉnh sửa
     const displayedData = datatable.slice(0, 6);
 
     useEffect(() => {
@@ -21,6 +22,13 @@ export default function Dashboard() {
 
     const handleOnclick = (item) => {
         setSelectedItem(item);
+        setIsAdding(false); // Đặt là false khi chỉnh sửa
+        setIsModalOpen(true);
+    };
+
+    const handleAddClick = () => {
+        setSelectedItem(null);
+        setIsAdding(true); // Đặt là true khi thêm
         setIsModalOpen(true);
     };
 
@@ -40,6 +48,25 @@ export default function Dashboard() {
             .catch(error => console.error('Error updating item:', error));
     };
 
+    const handleAdd = (newItem) => {
+        fetch(`https://67e369142ae442db76d0029b.mockapi.io/dttb`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newItem),
+        })
+            .then(response => response.json())
+            .then(data => {
+                setDataTable(prev => [...prev, data]); // Thêm item mới vào danh sách
+                closeModal();
+                {
+                    console.log("them thanh cong", newItem);
+                }
+            })
+            .catch(error => console.error('Error adding item:', error));
+    };
+
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedItem(null);
@@ -47,7 +74,7 @@ export default function Dashboard() {
 
     var style = { width: "250px", height: "30px", borderRadius: "5px", margin: "15px" }
 
-    function Modal({ isOpen, onClose, item }) {
+    function Modal({ isOpen, onClose, item, isAdding }) {
         const [name, setName] = useState(item ? item.name : '');
         const [company, setCompany] = useState(item ? item.company : '');
         const [orderValue, setOrderValue] = useState(item ? item.orderValue : '');
@@ -61,6 +88,13 @@ export default function Dashboard() {
                 setOrderValue(item.orderValue);
                 setOrderDate(new Date(item.orderDate).toLocaleDateString());
                 setStatus(item.status);
+            } else {
+                // Reset input fields when adding new item
+                setName('');
+                setCompany('');
+                setOrderValue('');
+                setOrderDate('');
+                setStatus('');
             }
         }, [item]);
 
@@ -71,16 +105,20 @@ export default function Dashboard() {
                 name,
                 company,
                 orderValue,
-                orderDate: new Date(orderDate).toISOString(), // Đảm bảo định dạng ngày đúng
+                orderDate: new Date(orderDate).toISOString(),
                 status,
             };
-            handleEdit(item.id, updatedItem);
+            if (isAdding) {
+                handleAdd(updatedItem); // Gọi hàm thêm item mới
+            } else {
+                handleEdit(item.id, updatedItem); // Gọi hàm chỉnh sửa item
+            }
         };
 
         return (
             <div style={modalStyles.overlay}>
                 <div style={modalStyles.modal}>
-                    <h2>Details</h2>
+                    <h2>{isAdding ? "Add New Item" : "Edit Item"}</h2>
                     <table style={{ width: "100%" }}>
                         <tbody>
                             <tr>
@@ -144,10 +182,10 @@ export default function Dashboard() {
         },
     };
 
-
     const addData = () => {
-        console.log("click add")
+        handleAddClick(); // Mở modal để thêm dữ liệu
     }
+
     const colors = ["#FFB6C1", "#E0F7FA", "#FFD1DC"];
 
     return (
@@ -188,7 +226,7 @@ export default function Dashboard() {
                     <img style={{ width: "25px", height: "25px" }} src="../Lab_05/File text 1.png" alt="" />
                     <h3 style={{ padding: "0px", margin: "0px" }}>Detailed Report</h3>
                     <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
-                        <div onClick={addData} style={{ border: "1px solid #FF4081", padding: "5px", display: "flex", marginRight: "7px", color: "#FF4081", width: "40px", borderRadius: "5px" }}>Add</div>
+                        <div onClick={handleAddClick} style={{ border: "1px solid #FF4081", padding: "5px", display: "flex", marginRight: "7px", color: "#FF4081", width: "40px", borderRadius: "5px", cursor: "pointer" }}>Add</div>
                         <div style={{ border: "1px solid #FF4081", padding: "5px", display: "flex", marginRight: "7px", color: "#FF4081", borderRadius: "5px" }}><img src="../Lab_05/Download.png" alt="" />import</div>
                         <div style={{ border: "1px solid #FF4081", padding: "5px", display: "flex", color: "#FF4081", borderRadius: "5px" }}><img src="../Lab_05/Move up.png" />export</div>
                     </div>
@@ -241,11 +279,10 @@ export default function Dashboard() {
                     <li style={{ width: "25px", height: "25px", padding: "5px" }}>11</li>
                     <li style={{ width: "25px", height: "25px", padding: "5px" }}>12</li>
                     <li style={{ width: "25px", height: "25px", padding: "5px" }}><img style={{ width: "25px", height: "25px" }} src="../Lab_05/right-arrow (1).png" alt="" /></li>
-
                 </ul>
             </div>
 
-            <Modal isOpen={isModalOpen} onClose={closeModal} item={selectedItem} />
+            <Modal isOpen={isModalOpen} onClose={closeModal} item={selectedItem} isAdding={isAdding} />
         </div>
     );
 }
