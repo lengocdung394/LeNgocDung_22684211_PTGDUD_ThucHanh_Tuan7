@@ -186,13 +186,13 @@ export default function Dashboard() {
         handleAddClick(); // Mở modal để thêm dữ liệu
     }
 
-    const colors = ["#FFB6C1", "#E0F7FA", "#FFD1DC"];
+    const colors = ["#FFC0CB", "rgb(221, 234, 247)", "rgb(231, 238, 245)"];
 
     return (
         <div>
-            <div style={{ height: "50px", display: "flex", borderBottom: "2px solid gray", paddingTop: "15px" }}>
+            <div style={{ height: "40px", display: "flex", borderBottom: "2px solid #EEEEEE", paddingTop: "15px" }}>
                 <h2 style={{ margin: "0", color: '#FF4081' }}>DashBoard</h2>
-                <input type="text" style={{ width: "220px", height: "25px", marginLeft: "500px", borderRadius: "5px" }} />
+                <input type="text" style={{ width: "220px", height: "25px", marginLeft: "470px", borderRadius: "5px",border:"1px solid white ", backgroundColor:"#EEEEEE" }} />
                 <img src="../image/bell.png" alt="" style={{ width: "25px", height: "25px", marginLeft: "20px", marginRight: "20px" }} />
                 <h3 style={{ margin: "0px" }}>?</h3>
                 <img src="../image/account.jpg" alt="" style={{ width: "32px", height: "32px", borderRadius: "20px", marginLeft: "20px" }} />
@@ -231,7 +231,7 @@ export default function Dashboard() {
                         <div style={{ border: "1px solid #FF4081", padding: "5px", display: "flex", color: "#FF4081", borderRadius: "5px" }}><img src="../Lab_05/Move up.png" />export</div>
                     </div>
                 </div>
-                <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", border: "1px solid #EEEEEE", marginTop: "10px" }}>
                     <thead>
                         <tr>
                             <th style={{ border: "1px solid #ddd", padding: "8px" }}><input type='checkbox' /></th>
@@ -271,7 +271,7 @@ export default function Dashboard() {
                 <p style={{ width: "200px" }}>63 result</p>
                 <ul style={{ display: "flex", justifyContent: "center", listStyle: "none", padding: "0px", marginLeft: "430px" }}>
                     <li style={{ width: "25px", height: "25px", padding: "5px" }}><img style={{ width: "25px", height: "25px" }} src="../Lab_05/left-arrow.png" alt="" /></li>
-                    <li style={{ width: "25px", height: "25px", padding: "5px", borderRadius: "20px", color: "white", justifyContent: "center", backgroundColor: "#FF4081" }}>1</li>
+                    <li style={{ width: "25px", height: "25px", padding: "5px", borderRadius: "20px", color: "white", justifyContent: "center", backgroundColor: "#FF4081" }}><p style={{margin:"0px", paddingLeft:"7px"}}>1</p></li>
                     <li style={{ width: "25px", height: "25px", padding: "5px" }}>2</li>
                     <li style={{ width: "25px", height: "25px", padding: "5px" }}>3</li>
                     <li style={{ width: "25px", height: "25px", padding: "5px" }}>4</li>

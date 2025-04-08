@@ -11,7 +11,7 @@ function App() {
     navigate(item.path); // Navigate to the respective path
   };
   const menuItems = [
-    { name: 'DashBoard', path: '/', src: '../Lab_05/dashboard.png' },
+    { name: 'DashBoard', path: '/', src: '../Lab_05/Squares four 1.png' },
     { name: 'Project', path: '/project', src: '../Lab_05/Folder.png' },
     { name: 'Teams', path: '/teams', src: '../Lab_05/Groups.png' },
     { name: 'Analytics', path: '/analytics', src: '../Lab_05/Pie chart.png' },
@@ -21,8 +21,8 @@ function App() {
 
   return (
     <div style={{ marginLeft: "120px", display: "flex" }}>
-      <div id="component" style={{ display: 'flex', height: "850px", width: "1200px", margin: "10px", border: "2px solid gray", borderRadius: "5px" }}>
-        <div id="left" style={{ width: "230px", borderRight: "2px solid gray" }}>
+      <div id="component" style={{ display: 'flex', height: "760px", width: "1200px", margin: "10px", border: "2px solid #EEEEEE", borderRadius: "5px" }}>
+        <div id="left" style={{ width: "230px", borderRight: "2px solid #EEEEEE" }}>
           <img src="../Lab_05/Image 1858.png" style={{ width: "90px", height: "40px", margin: "10px" }} alt="" />
           <ul style={{ margin: "10px", padding: "0" }}>
             {menuItems.map((item) => (
@@ -49,7 +49,7 @@ function App() {
           </ul>
 
 
-          <div style={{ position: 'relative', display: 'inline-block', marginTop: "90px" }}>
+          <div style={{ position: 'relative', display: 'inline-block', marginTop: "30px" }}>
             <img src="../Lab_05/Group.png" alt="Group" style={{ width: '100%', height: 'auto' }} />
             <p style={{
               color: "black",
